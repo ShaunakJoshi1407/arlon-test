@@ -1,0 +1,21 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cloudprovider-nodelet-shaunak-3-xenial-static
+  namespace: argocd
+  finalizers:
+  # This solves issue #17
+  - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+  destination:
+    name: cloudprovider-nodelet-shaunak-3
+    namespace: default
+  project: default
+  source:
+    repoURL: https://github.com/jayanth-tjvrr/pf9arlon-test
+    path: clusters/cloudprovider-nodelet-shaunak-3/workload/xenial-static
+    targetRevision: HEAD
